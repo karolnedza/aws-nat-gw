@@ -2,41 +2,41 @@ resource "aws_s3_bucket" "bucket" {
   bucket = "my-bucket-fersgfsergversv"
 }
 
-# 
-# resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
-#   bucket = aws_s3_bucket.bucket.id
-# 
-#   rule {
-#     id = "log"
-# 
-#     expiration {
-#       days = 90
-#     }
-# 
-#     filter {
-#       and {
-#         prefix = "log/"
-# 
-#         tags = {
-#           rule      = "log"
-#           autoclean = "true"
-#         }
-#       }
-#     }
-# 
-#     status = "Enabled"
-# 
-#     transition {
-#       days          = 30
-#       storage_class = "STANDARD_IA"
-#     }
-# 
-#     transition {
-#       days          = 60
-#       storage_class = "GLACIER"
-#     }
-#   }
-# }
+
+resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
+  bucket = aws_s3_bucket.bucket.id
+
+  rule {
+    id = "log"
+
+    expiration {
+      days = 90
+    }
+
+    filter {
+      and {
+        prefix = "log/"
+
+        tags = {
+          rule      = "log"
+          autoclean = "true"
+        }
+      }
+    }
+
+    status = "Enabled"
+
+    transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+
+    transition {
+      days          = 60
+      storage_class = "GLACIER"
+    }
+  }
+}
 
 
 # resource "aws_eip" "example" {
